@@ -224,18 +224,21 @@ class MfmInlineSpan extends TextSpan {
             baseline: TextBaseline.alphabetic,
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () => Mfm.of(context).linkTap?.call(node.url),
-                child: MfmElementWidget(
-                  style: style?.merge(
-                    Mfm.of(context).linkStyle ??
-                        TextStyle(color: Theme.of(context).primaryColor),
+              child: Tooltip(
+                message: node.url,
+                child: GestureDetector(
+                  onTap: () => Mfm.of(context).linkTap?.call(node.url),
+                  child: MfmElementWidget(
+                    style: style?.merge(
+                      Mfm.of(context).linkStyle ??
+                          TextStyle(color: Theme.of(context).primaryColor),
+                    ),
+                    nodes: node.children,
+                    depth: depth + 1,
                   ),
-                  nodes: node.children,
-                  depth: depth + 1,
                 ),
               ),
-            )
+            ),
           )
         else if (node is MfmURL)
           TextSpan(style: style?.merge(Mfm.of(context).linkStyle ?? TextStyle(color: Theme.of(context).primaryColor)), text: node.value.decodeUri.tight, recognizer: TapGestureRecognizer()..onTap = () => Mfm.of(context).linkTap?.call(node.value))
