@@ -49,8 +49,8 @@ Widget _defaultInlineCodeBuilder(
     Container(
       decoration: const BoxDecoration(color: Colors.black87),
       padding: const EdgeInsets.only(left: 5, right: 5),
-      child: Text.rich(
-        textScaleFactor: 1.0,
+      child: SelectableText.rich(
+        textScaler: 1.0,
         textAlign: MfmAlignScope.of(context),
         TextSpan(
             style: (style ?? const TextStyle())
